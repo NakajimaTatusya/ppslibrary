@@ -1,0 +1,6 @@
+*.exe
+LICENSE
+NOTICE
+/conf/
+/logs/
+/resource/
