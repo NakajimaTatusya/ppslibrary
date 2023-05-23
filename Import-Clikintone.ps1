@@ -46,7 +46,7 @@ function Get-CurrentDirectoryPath {
     return $retval
 }
 
-function Execute-CliKintone {
+function Invoke-Clikintone {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)][string]$logpath,
@@ -116,7 +116,6 @@ Set-Location -Path (Get-CurrentDirectoryPath)
 Import-Module -Name .\library\AppCommon.psm1 -Force
 
 $setting = (Read-JsonSettingFile -path $jsonConfigFile)
-$nExitCode = 0
 
 # 不要ログ削除
 $retString = PurgeFiles -PurgePath $setting.batsettings.logfilepath -PastDays $setting.batsettings.logSaveDays
@@ -134,7 +133,7 @@ foreach ($item in $setting.apps) {
             -LogString ("アプリケーション:{0}に、CSVをインポートします。" -f $item.appname)
         
         $timeSpan = Measure-Command {
-            Execute-CliKintone `
+            Invoke-Clikintone `
                 -logpath $setting.batsettings.logfilepath `
                 -logname $setting.batsettings.logfilename `
                 -baseUrl $setting.baseurl `
@@ -158,7 +157,7 @@ foreach ($item in $setting.apps) {
                 -LogString ("アプリケーション:{0}に、CSVをインポートします。" -f $item.appname)
         
             $timeSpan = Measure-Command {
-                Execute-CliKintone `
+                Invoke-Clikintone `
                     -logpath $setting.batsettings.logfilepath `
                     -logname $setting.batsettings.logfilename `
                     -baseUrl $setting.baseurl `
@@ -184,5 +183,3 @@ foreach ($item in $setting.apps) {
 Log -LogPath $setting.batsettings.logfilepath `
     -LogName $setting.batsettings.logfilename `
     -LogString "cli-Kintoneを使用してCSVデータのインポートが完了しました。"
-
-return $nExitCode
