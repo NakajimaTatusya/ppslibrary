@@ -23,7 +23,20 @@ REM make a relative file path for logs.
 set IMPORTLOGFILE=.\logs\Cli-Kintone-BAT_%datetimestr%.log
 
 REM Execute a PowerShell script.
+REM ALL
+REM PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
+
+REM APPLICATION 1
 PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -application "cli-kintone import csv data" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
 
-if %ERRORLEVEL%==1 (Exit /b 1) else (Exit /b 0)
+REM APPLICATION 2
+REM PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -application "cli-kintone import csv data" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
+
+REM APPLICATION 3
+REM PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -application "Dummy1" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
+
+REM APPLICATION 4
+REM PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -application "Dummy2" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
+
 pause
+if not %ERRORLEVEL%==0 (Exit /b 1) else (Exit /b 0)
