@@ -13,10 +13,10 @@ param (
     [Parameter(Mandatory=$true)][string]$application = ""
 )
 
-# 関数のエラーはキャッチできるようにする。
+# Catch the errrors.
 $ErrorActionPreference = "Stop"
 
-# バッチファイルの設定が記述されているファイルパス
+# Configuration file path.
 Set-Variable jsonConfigFile -Option Constant -Value ".\\conf\\conf.json"
 
 
@@ -120,19 +120,20 @@ function Invoke-Clikintone {
 }
 
 
-# 実行時ディレクトリを設定
+# set current directory.
 Set-Location -Path (Get-CurrentDirectoryPath)
 
-# ライブラリのインポート
+# import library.
 Import-Module -Name .\library\AppCommon.psm1 -Force
 
+# Read the import CSV configuration file.
 $setting = (Read-JsonSettingFile -path $jsonConfigFile)
 
-# 不要ログ削除
+# purge old logs.
 $retString = PurgeFiles -PurgePath $setting.batsettings.logfilepath -PastDays $setting.batsettings.logSaveDays
 Log -LogPath $setting.batsettings.logfilepath -LogName $setting.batsettings.logfilename -LogString ("不要ログ削除：{0}" -f $retString)
 
-# 処理開始
+# process start.
 if ($batmode -eq "delete") {
     Log -LogPath $setting.batsettings.logfilepath `
     -LogName $setting.batsettings.logfilename `
@@ -243,7 +244,7 @@ else {
         }
     }
 
-    # 処理終了
+    # end process.
     Log -LogPath $setting.batsettings.logfilepath `
         -LogName $setting.batsettings.logfilename `
         -LogString "cli-Kintoneを使用してCSVデータのインポートが完了しました。"
