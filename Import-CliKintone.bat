@@ -20,7 +20,7 @@ set datetimestr=%year%%month%%day%_%hh%%mi%%ss%%sss%
 REM echo datetimestr = %datetimestr%
 
 REM make a relative file path for logs.
-set IMPORTLOGFILE=.\logs\Cli-Kintone-BAT_%datetimestr%.log
+set IMPORTLOGFILE=.\logs\Cli-Kintone-imp-BAT_%datetimestr%.log
 
 REM ####################↓↓↓ IMPORT ↓↓↓####################
 REM Execute a PowerShell script.
@@ -29,17 +29,11 @@ REM PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.
 REM APPLICATION 1
 REM PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -batmode import -application "import csv with attachments files" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
 REM APPLICATION 2
-PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -batmode import -application "cli-kintone import csv data" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
+REM PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -batmode import -application "cli-kintone import csv data" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
 REM APPLICATION 3
 REM PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -batmode import -application "Dummy1" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
 REM APPLICATION 4
-REM PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -batmode import -application "Dummy2" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
+PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -batmode import -application "testapp4" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
 REM ####################↑↑↑ IMPORT ↑↑↑####################
 
-
-REM #################↓↓↓ DELETE ALL RECORDS ↓↓↓############################
-REM PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -batmode delete -application "cli-kintone import csv data" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
-REM #################↑↑↑ DELETE ALL RECORDS ↑↑↑############################
-
-pause
 if not %ERRORLEVEL%==0 (Exit /b 1) else (Exit /b 0)
