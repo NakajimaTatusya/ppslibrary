@@ -5,4 +5,5 @@ NOTICE
 /logs/
 /resource/
 README.html
-test-loadcsv.ps1
+Edit-Attachments.ps1
+Edit-Attachments.bat
