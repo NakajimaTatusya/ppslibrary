@@ -23,7 +23,7 @@ REM make a relative file path for logs.
 set IMPORTLOGFILE=.\logs\Cli-Kintone-delete-BAT_%datetimestr%.log
 
 REM #################↓↓↓ DELETE ALL RECORDS ↓↓↓############################
-PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -batmode delete -application "testapp4" 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
+PowerShell -NoProfile -ExecutionPolicy Unrestricted -File Import-Clikintone.ps1 -batmode delete -application Naibu 1> %IMPORTLOGFILE% 2>&1 3>&1 4>&1 5>&1 6>&1
 REM #################↑↑↑ DELETE ALL RECORDS ↑↑↑############################
 
 
